@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.firstname = "John";
+        $scope.lastname = "Doe";
+        $scope.fullname = function() {
+            return $scope.firstname + " " + $scope.lastname;
+        };
+    });
+</script>
+<div ng-app="myApp">
+<div ng-controller="myCtrl">
+<p ng-bind="firstname"></p>
+<p>First Name: {{fullname()}}</p>
+<input type="" name="" ng-model="firstname">
+</div>
+<hr>
+<script type="text/javascript">
+    app.controller('namesCtrl', function($scope) {
+        $scope.names = [
+            {name: 'Jani', country: 'Norway'},
+            {name: 'Hege', country: 'Sweden'},
+            {name: 'Kai', country: 'Denmark'}
+        ];
+    });
+</script>
+<div ng-controller="namesCtrl">
+<ul>
+    <li ng-repeat="x in names">
+        {{x.name + ", " + x.country}}
+    </li>
+</ul>
+</div>
+</div>
+</body>
+</html>

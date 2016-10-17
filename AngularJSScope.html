@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.names = ["Emil", "Tobias", "Linus"];
+    });
+    app.run(function($rootScope) {
+        $rootScope.color = "blue";
+    });
+    app.controller('myCtrl', function($scope) {
+        $scope.color = "red";
+    });
+</script>
+<div ng-app="myApp">
+    <!-- <div ng-controller="myCtrl">
+    <ul>
+        <li ng-repeat="x in names">{{x}}</li>
+    </ul>
+    </div>
+    <br> -->
+    <p>The rootScope's favorite color: </p>
+    <h1>{{color}}</h1>
+    <div ng-controller="myCtrl">
+        <p>The scope of the controller's favorite color: </p>
+        <h1>{{color}}</h1>
+        <p>The rootScope's favorite color is still: </p>
+        <h1>{{color}}</h1>
+    </div>
+</div>
+
+</body>
+</html>
