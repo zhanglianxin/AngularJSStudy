@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+var app = angular.module('myApp', []);
+app.controller('personCtrl', function($scope) {
+    $scope.firstname = "John";
+    $scope.lastname = "Doe";
+});
+</script>
+<div ng-app="myApp" ng-controller="personCtrl">
+<p>The name is {{lastname | uppercase}}</p>
+<p>The name is {{lastname | lowercase}}</p>
+<hr>
+
+<script type="text/javascript">
+app.controller('namesCtrl', function($scope) {
+    $scope.names = [
+        {name: 'Jani', country: 'Norway'},
+        {name: 'Hege', country: 'Sweden'},
+        {name: 'Kai', country: 'Denmark'}
+    ];
+});
+</script>
+<div ng-controller="namesCtrl">
+<ul>
+    <li ng-repeat="x in names | orderBy: 'country'">
+        {{x.name + ", " + x.country}}
+    </li>
+</ul>
+</div>
+<hr>
+
+<script type="text/javascript">
+app.controller('costCtrl', function($scope) {
+    $scope.price = 58;
+});
+</script>
+<div ng-controller="costCtrl">
+<h1>Price: {{price | currency}}</h1>
+</div>
+<hr>
+
+<script type="text/javascript">
+app.controller('namesCtrl1', function($scope) {
+    $scope.names = ['Jani', 'Carl', 'Margareth', 
+    'Hege', 'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai'];
+});
+</script>
+<div ng-controller="namesCtrl1">
+    <ul>
+        <li ng-repeat="x in names | filter: 'i'">{{x}}</li>
+    </ul>
+
+    <p><input type="text" ng-model="test"></p>
+    <ul>
+        <li ng-repeat="x in names | filter: test">{{x}}</li>
+    </ul>
+</div>
+<br>
+
+<script type="text/javascript">
+app.controller('namesCtrl', function($scope) {
+    $scope.names = [
+        {name:'Jani',country:'Norway'},
+        {name:'Carl',country:'Sweden'},
+        {name:'Margareth',country:'England'},
+        {name:'Hege',country:'Norway'},
+        {name:'Joe',country:'Denmark'},
+        {name:'Gustav',country:'Sweden'},
+        {name:'Birgit',country:'Denmark'},
+        {name:'Mary',country:'England'},
+        {name:'Kai',country:'Norway'}
+    ];
+    $scope.orderByMe = function(x) {
+        $scope.myOrderBy = x;
+    }
+});
+</script>
+<div ng-controller="namesCtrl">
+    <table border="1" width="13%">
+        <tr>
+            <th ng-click="orderByMe('name')">Name</th>
+            <th ng-click="orderByMe('country')">Country</th>
+        </tr>
+        <tr ng-repeat="x in names | orderBy: myOrderBy">
+            <td>{{x.name}}</td>
+            <td>{{x.country}}</td>
+        </tr>
+    </table>
+</div>
+<br>
+
+<script type="text/javascript">
+app.filter('myFormat', function() {
+    return function(x) {
+        var i, c, txt = "";
+        x = x.split("");
+        for (i = 0; i < x.length; i++) {
+            c = x[i];
+            if (i % 2 == 0) {
+                c = c.toUpperCase();
+            }
+            txt += c;
+        }
+        return txt;
+    };
+});
+app.controller('namesCtrl2', function($scope) {
+    $scope.names = ['Jani', 'Carl', 'Margareth', 'Hege', 
+    'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai'];
+});
+</script>
+<div ng-controller="namesCtrl2">
+    <ul>
+        <li ng-repeat="x in names">{{x | myFormat}}</li>
+    </ul>
+</div>
+
+</div>
+
+</body>
+</html>
