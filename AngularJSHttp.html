@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $http) {
+        $http.get("AngularJS").then(function(response) {
+            $scope.myPage = response.data;
+        });
+    });
+    app.controller('myCtrl1', function($scope, $http) {
+        $http({
+            method: "GET",
+            url: "AngularJS1"
+        }).then(function mySuccess(response) {
+            $scope.myPage = response.data;
+        }, function myError(response) {
+            $scope.myPage = response.statusText;
+        });
+    });
+    app.controller('myCtrl2', function($scope, $http) {
+        $http.get("AngularJS").then(function(response) {
+            $scope.content = response.data;
+            $scope.statuscode = response.status;
+            $scope.statustext = response.statusText;
+        });
+    });
+    app.controller('myCtrl3', function($scope, $http) {
+        $http.get("AngularJS1").then(function(response) {
+            // First function handles success
+            $scope.content = response.data;
+        }, function(response) {
+            // Second function handles error
+            $scope.content = "Something went wrong.";
+        });
+    });
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get("customers.php").then(function(response) {
+            $scope.myData = response.data.records;
+        });
+    });
+</script>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <h1>{{myPage}}</h1>
+    </div>
+
+    <div ng-controller="myCtrl1">
+        <h1>{{myPage}}</h1>
+    </div>
+
+    <div ng-controller="myCtrl2">
+        <p>Data: {{content}}</p>
+        <p>Status: {{statuscode}}</p>
+        <p>StatusText: {{statustext}}</p>
+    </div>
+
+    <div ng-controller="myCtrl3">
+        <h1>{{content}}</h1>
+    </div>
+
+    <div ng-controller="customersCtrl">
+        <ul>
+            <li ng-repeat="x in myData">
+                {{ x.Name + ', ' + x.Country }}
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

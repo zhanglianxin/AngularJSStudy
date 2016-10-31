@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.names = ["Emil", "Tobias", "Linus"];
+        $scope.cars = [
+            {model: "Ford Mustang", color: "red"},
+            {model: "Fiat 500", color: "white"},
+            {model: "Volvo XC90", color: "black"}
+        ];
+        $scope.cars1 = {
+            car01: "Ford",
+            car02: "Fiat",
+            car03: "Volvo"
+        };
+        $scope.cars2 = {
+            car01: {brand: "Ford", model: "Mustang", color: "red"},
+            car02: {brand: "Fiat", model: "500", color: "white"},
+            car03: {brand: "Volvo", model: "XC90", color: "black"}
+        };
+    });
+</script>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <div>
+            <select ng-model="selectName" ng-options="x for x in names">
+            </select>
+            <select ng-model="selectName">
+                <option ng-repeat="x in names">
+                    {{ x }}
+                </option>
+            </select>
+        </div>
+        <!-- Dropdowns made with ng-options allows the selected value to be an object, while dropdowns made from ng-repeat has to be a string. -->
+        <div>
+            <select ng-model="selectedCar" ng-options="x.model for x in cars">
+            </select>
+            <select ng-model="selectedCar">
+                <option ng-repeat="x in cars" value="{{x.model}}">{{ x.model }}</option>
+            </select>
+            <p>You selected: {{ selectedCar.model }}</p>
+            <p>It's color is: {{ selectedCar.color }}</p>
+            <p>You selected: {{ selectedCar }}</p>
+        </div>
+        <div>
+            <select ng-model="selectedCar1" ng-options="x for (x, y) in cars1">
+            </select>
+            <p>You selected: {{ selectedCar1 }}</p>
+        </div>
+        <div>
+            <select ng-model="selectedCar2" ng-options="x for (x, y) in cars2">
+            </select>
+            <select ng-model="selectedCar2" ng-options="y.brand for (x, y) in cars2">
+            </select>
+            <p>You selected: {{ selectedCar2.brand }}</p>
+            <p>Model: {{ selectedCar2.model }}
+            <p>Color: {{ selectedCar2.color }}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
