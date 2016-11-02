@@ -6,8 +6,51 @@
 </head>
 <body>
 <script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.count = 0;
+        $scope.myFunction = function() {
+            $scope.count++;
+        };
+    });
+    app.controller('myCtrl1', function($scope) {
+        $scope.showMe = false;
+        $scope.myFunction1 = function() {
+            $scope.showMe = !$scope.showMe;
+        };
+        
+    });
+    app.controller('myCtrl2', function($scope) {
+        $scope.myFunction2 = function(myE) {
+            $scope.x = myE.clientX;
+            $scope.y = myE.clientY;
+        };
+    });
 </script>
-<div ng-app="">
+<div ng-app="myApp">
+    <p>The event directives allows us to run AngularJS functions at certain user events.</p>
+    <p>An AngularJS event will not overwrite an HTML event, both events will be executed.</p>
+    <div ng-controller="myCtrl">
+        <h1 ng-mousemove="count = count + 1">
+            Mouse over me!
+        </h1>
+        <h2>{{ count }}</h2>
+        <button ng-click="count = count + 1">Click me!</button>
+        <button ng-click="myFunction()">Click me!</button>
+    </div>
+    <div ng-controller="myCtrl1">
+        <button ng-click="myFunction1()">Click me!</button>
+        <div ng-show="showMe">
+            <h1>Menu:</h1>
+            <div>Pizza</div>
+            <div>Pasta</div>
+            <div>Pesce</div>
+        </div>
+    </div>
+    <div ng-controller="myCtrl2">
+        <h1 ng-mousemove="myFunction2($event)">Mouse over me!</h1>
+        <p>Coordinates: {{ x + ', ' + y }}</p>
+    </div>
 </div>
 
 </body>

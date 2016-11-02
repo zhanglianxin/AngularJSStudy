@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('formCtrl', function($scope) {
+        $scope.firstname = "John";
+    });
+    app.controller('formCtrl1', function($scope) {
+        $scope.master = {firstname: "John", lastname: "Doe"};
+        $scope.reset = function() {
+            $scope.user = angular.copy($scope.master);
+        };
+        $scope.reset();
+    });
+</script>
+<div ng-app="myApp">
+    <div ng-controller="formCtrl">
+        <form>
+            First Name: <input type="text" ng-model="firstname">
+        </form>
+    </div>
+    <div>
+        <form>
+            First Name: <input type="text" ng-model="firstname">
+            <h1>You entered: {{ firstname }}</h1>
+        </form>
+    </div>
+    <div>
+        <form>
+            Check to show a header: <input type="checkbox" ng-model="myVar">
+        </form>
+        <h1 ng-show="myVar">My Header</h1>
+    </div>
+    <div>
+        <form>
+            Pick a topic: 
+            <input type="radio" ng-model="myVar1" value="dogs">Dogs
+            <input type="radio" ng-model="myVar1" value="tuts">Tutorials
+            <input type="radio" ng-model="myVar1" value="cars">Cars
+        </form>
+        <div ng-switch="myVar1">
+            <div ng-switch-when="dogs">
+                <h1>Dogs</h1>
+                <p>Welcome to a world of dogs.</p>
+            </div>
+            <div ng-switch-when="tuts">
+                <h1>Tutorials</h1>
+                <p>Learn from examples.</p>
+            </div>
+            <div ng-switch-when="cars">
+                <h1>Cars</h1>
+                <p>Read abouts.</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <form>
+            Select a topic: 
+            <select ng-model="myVar2">
+                <option value=""></option>
+                <option value="dogs">Dogs</option>
+                <option value="tuts">Tutorials</option>
+                <option value="cars">Cars</option>
+            </select>
+        </form>
+        <div ng-switch="myVar2">
+            <div ng-switch-when="dogs">
+                <h1>Dogs</h1>
+                <p>Welcome to a world of dogs.</p>
+            </div>
+            <div ng-switch-when="tuts">
+                <h1>Tutorials</h1>
+                <p>Learn from examples.</p>
+            </div>
+            <div ng-switch-when="cars">
+                <h1>Cars</h1>
+                <p>Read abouts.</p>
+            </div>
+        </div>
+    </div>
+    <!-- <p>The <strong>formCtrl</strong> controller sets initial values to the <strong>master</strong> object, and defines the <strong>reset()</strong> method.</p> -->
+    <div ng-controller="formCtrl1">
+        <!-- <p>The <strong>novalidate</strong> attribute is new in HTML5. It disables any default browser validation.</p> -->
+        <!-- <p>The novalidate attribute is not needed for this application, but normally you will use it in AngularJS forms, to override standard HTML5 validation.</p> -->
+        <form novalidate="">
+            First Name: <br>
+            <!-- <p>The <strong>ng-model</strong> directive binds two input elements to the <strong>user</strong> object in the model.</p> -->
+            <input type="text" ng-model="user.firstname"><br>
+            Last Name: <br>
+            <input type="text" ng-model="user.lastname"><br><br>
+            <!-- <p>The <strong>reset()</strong> method sets the <strong>user</strong> object equal to the <strong>master</strong> object. </p> -->
+            <!-- <p>The <strong>ng-click</strong> directive invokes the <strong>reset()</strong> method, only if the button is clicked.</p> -->
+            <button ng-click="reset()">RESET</button>
+        </form>
+        <p>form = {{ user }}</p>
+        <p>master = {{ master }}</p>
+    </div>
+</div>
+
+</body>
+</html>

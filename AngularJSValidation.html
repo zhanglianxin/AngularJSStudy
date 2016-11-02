@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+    <style type="text/css">
+        #myForm3>input.ng-invalid {
+            background-color: pink;
+        }
+        #myForm3>input.ng-valid {
+            background-color: lightgreen;
+        }
+        form.ng-pristine {
+            background-color: lightblue;
+        }
+        form.ng-dirty {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.directive('myDirective', function() {
+        return {
+            required: 'ngModel',
+            link: function(scope, element, attr, mCtrl) {
+                function myValidation(value) {
+                    if (value.indexOf("e") > -1) {
+                        mCtrl.$setValidity('charE', true);
+                    } else {
+                        mCtrl.$setValidity('charE', false);
+                    }
+                    return value;
+                };
+                mCtrl.$parsers.push(myValidation);
+            }
+        };
+    });
+</script>
+<div ng-app="myApp">
+    <div>
+        <p>Try writing in the input field:</p>
+        <form name="myForm">
+            <input name="myInput" ng-model="myInput" required>
+        </form>
+        <p>The input's valid state is:</p>
+        <h1>{{ myForm.myInput.$valid }}</h1>
+        
+        <p>Try writing an E-mail address in the input field:</p>
+        <form name="myForm1">
+            <input type="email" name="myInput1" ng-model="myInput1">
+        </form>
+        <p>The input's valid state is:</p>
+        <h1>{{ myForm1.myInput1.$valid }}</h1>
+        <p>Note that the state of the input field is "true" before you start writing in it, even if it does not contain an e-mail address.</p>
+        
+        <p>Try leaving the first input field blank:</p>
+        <form name="myForm2">
+            <p>Name: 
+                <input name="myName" ng-model="myName" required>
+                <span ng-show="myForm2.myName.$touched && myForm2.myName.$invalid">The name is required.</span>
+            </p>
+            <p>Address: 
+                <input name="myAddress" ng-model="myAddress" required>
+            </p>
+        </form>
+        <p>We use the ng-show directive to only show the error message if the field has been touched AND is empty.</p>
+
+        <p>Try writing in the input field:</p>
+        <form name="myForm3" id="myForm3">
+            <input name="myName" ng-model="myName1" required>
+        </form>
+        <p>The input field requires content, and will therefore become green when you write in it.</p>
+
+        <form name="myForm4" id="myForm4">
+            <p>Try writing in the input field:</p>
+            <input name="myName" ng-model="myName2" required>
+            <p>The form gets a "ng-dirty" class when the form has been modified, and will therefore turn pink.</p>
+        </form>
+
+        <p>Try writing in the input field:</p>
+        <form name="myForm5">
+            <input name="myInput2" ng-model="myInput2" required my-directive="myDirective">
+        </form>
+        <p>The input's valid state is:</p>
+        <h1>{{ myForm5.myInput2.$valid }}</h1>
+        <h3>Example Explained:</h3>
+        <p>In HTML, the new directive will be referred to by using the attribute <code>my-directive</code>.</p>
+        <p>In the JavaScript we start by adding a new directive named <code>myDirective</code>.</p>
+        <p>Remember, when naming a directive, you must use a camel case name, <code>myDirective</code>, but when invoking it, you must use <code>-</code> separated name, <code>my-directive</code>.</p>
+
+        <p>Then, return an object where you specify that we require&nbsp; <code>ngModel</code>, which is the ngModelController.</p>
+        <p>Make a linking function which takes some arguments, where the fourth argument, <code>mCtrl</code>, is the <code>ngModelController</code>,</p>
+        <p>Then specify a function, in this case named <code>myValidation</code>, which takes one argument, this argument is the value of the input element.</p>
+        <p>Test if the value contains the letter &quot;e&quot;, and set the validity of the model controller to either <code>true</code> or <code>false</code>.</p>
+        <p>At last, <code>mCtrl.$parsers.push(myValidation);</code> will add the <code>myValidation</code> function to an array of other functions, which will be executed every time the input value changes.</p>
+    </div>
+</div>
+
+</body>
+</html>
