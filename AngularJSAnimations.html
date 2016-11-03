@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        div {
+            transition: all linear 0.5s;
+            background-color: lightblue;
+            height: 100px;
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        .ng-hide {
+            height: 0;
+            width: 0;
+            background-color: transparent;
+            top: -200px;
+            left: 200px;
+        }
+    </style>
+    <script src="angular.min.js"></script>
+    <!-- To make your applications ready for animations, you must include the AngularJS Animate library -->
+    <script src="angular-animate.js"></script>
+</head>
+<!-- you must refer to the ngAnimate module in your application -->
+<!-- <body ng-app="ngAnimate"> -->
+<!-- Or if your application has a name, add ngAnimate as a dependency in your application module -->
+<body ng-app="myApp">
+    <script type="text/javascript">
+        var app = angular.module('myApp', ['ngAnimate']);
+    </script>
+
+    <h2>Hide the DIV: <input type="checkbox" ng-model="myCheck"></h2>
+    <p>An animation is when the transformation of an HTML element gives you an illusion of motion.</p>
+    <p>Applications should not be filled with animations, but some animations can make the application easier to understand.</p>
+    <div id="div1" ng-hide="myCheck"></div>
+
+    <h2>What Does ngAnimate Do?</h2>
+    <p>The ngAnimate module adds and removes classes.</p>
+    <p>The ngAnimate module does not animate your HTML elements, but when ngAnimate notice certain events, like hide or show of an HTML element, the element gets some pre-defined classes which can be used to make animations.</p>
+    <p>The directives in AngularJS who add/remove classes are:</p>
+    <ul>
+        <li><code>ng-show</code></li>
+        <li><code>ng-hide</code></li>
+        <li><code>ng-class</code></li>
+        <li><code>ng-view</code></li>
+        <li><code>ng-include</code></li>
+        <li><code>ng-repeat</code></li>
+        <li><code>ng-if</code></li>
+        <li><code>ng-switch</code></li>
+    </ul>
+    <p>The <code>ng-show</code> and <code>ng-hide</code> directives adds or removes a <code>ng-hide</code> class value.</p>
+    <p>The other directives adds a <code>ng-enter</code> class value when they enter the DOM, and a <code>ng-leave</code> attribute when they are removed from the DOM.</p>
+    <p>The <code>ng-repeat</code> directive also adds a <code>ng-move</code> class value when the HTML element changes position. </p>
+    <p>In addition, <em>during</em> the animation, the HTML element will have a set of class values, which will be removed when the animation has finished. Example: the <code>ng-hide</code> directive will add these class values:</p>
+    <ul>
+        <li><code>ng-animate</code></li>
+        <li><code>ng-hide-animate</code></li>
+        <li><code>ng-hide-add</code> (if the element will be hidden)</li>
+        <li><code>ng-hide-remove</code> (if the element will be showed)</li>
+        <li><code>ng-hide-add-active</code> (if the element will be hidden)</li>
+        <li><code>ng-hide-remove-active</code> (if the element will be showed)</li>
+    </ul>
+
+    <h2>Animations Using CSS</h2>
+    <h3>CSS Transitions</h3>
+    <p>CSS transitions allows you to change CSS property values smoothly, from one value to another, over a given duration:</p>
+    <h3>CSS Animations</h3>
+    <p>CSS Animations allows you to change CSS property values smoothly, from one value to another, over a given duration:</p>
+</body>
+</html>

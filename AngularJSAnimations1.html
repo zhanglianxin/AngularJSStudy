@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        div {
+            transition: all linear 0.5s;
+            background-color: lightblue;
+            height: 100px;
+        }
+        .ng-hide {
+            height: 0;
+        }
+    </style>
+    <script src="angular.min.js"></script>
+    <!-- To make your applications ready for animations, you must include the AngularJS Animate library -->
+    <script src="angular-animate.js"></script>
+</head>
+<!-- you must refer to the ngAnimate module in your application -->
+<!-- <body ng-app="ngAnimate"> -->
+<!-- Or if your application has a name, add ngAnimate as a dependency in your application module -->
+<body ng-app="myApp">
+    <script type="text/javascript">
+        var app = angular.module('myApp', ['ngAnimate']);
+    </script>
+
+    <h2>Hide the DIV: <input type="checkbox" ng-model="myCheck"></h2>
+    <div ng-hide="myCheck"></div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get("customers.php").then(function(response) {
+            $scope.names = response.data.records;
+        });
+    });
+    app.config(function($sceDelegateProvider) {
+        $sceDelegateProvider.resourceUrlWhitelist(['http://www.refsnesdata.no/**', 'http://localhost:8080/**']);
+    });
+</script>
+<div ng-app="myApp">
+    <h2>AngularJS Includes</h2>
+    <div ng-include="'AngularJS'"></div>
+
+    <h2>Include AngularJS Code</h2>
+    <div ng-controller="customersCtrl">
+        <div ng-include="'myTable.htm'"></div>
+    </div>
+
+    <h2>Include Cross Domains</h2>
+    <p>By default, the ng-include directive does not allow you to include files from other domains.</p>
+    <p>To include files from another domain, you can add a whitelist of legal files and/or domains in the config function of your application:</p>
+    <p>Be sure that the server on the destination allows cross domain file access.</p>
+    <div ng-include="'http://www.refsnesdata.no/angular_include.asp'"></div>
+</div>
+
+</body>
+</html>
