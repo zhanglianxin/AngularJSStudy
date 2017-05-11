@@ -1,5 +1,5 @@
 // Register `phoneList` component on the `phoneList` module
-angular.module('phonecatApp').component('phoneList', {
+angular.module('phoneList').component('phoneList', {
     // Using an external template
     templateUrl: 'phone-list/phone-list.template.html',
     controller: function PhoneListController() {
