@@ -4,13 +4,17 @@
     <meta charset="utf-8">
     <title></title>
     <!-- <link rel="stylesheet" href="//docs.angularjs.org/components/bootstrap-3.1.1/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="//angular.github.io/angular-phonecat/step-10/app/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//angular.github.io/angular-phonecat/step-10/app/app.css">
+    <link rel="stylesheet" href="//angular.github.io/angular-phonecat/step-14/app/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//angular.github.io/angular-phonecat/step-14/app/app.css">
+    <link rel="stylesheet" href="//angular.github.io/angular-phonecat/step-14/app/app.animations.css">
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="../angular.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.6.4/angular-route.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.6.4/angular-resource.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.6.4/angular-animate.min.js"></script>
     <script src="./app.module.js"></script>
     <script src="./app.config.js"></script>
+    <script src="./app.animations.js"></script>
     <script src="./phone-list/phone-list.module.js"></script>
     <script src="./phone-list/phone-list.component.js"></script>
     <script src="./phone-detail/phone-detail.module.js"></script>
@@ -21,6 +25,8 @@
     <script src="./core/phone/phone.service.js"></script>
 </head>
 <body>
-    <div ng-view></div>
+    <div class="view-container">
+        <div ng-view class="view-frame"></div>
+    </div>
 </body>
 </html>
