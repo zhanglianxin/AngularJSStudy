@@ -1,2 +1,2 @@
 // Define the `core` module
-var core = angular.module('core', []);
+var core = angular.module('core', ['core.phone']);
